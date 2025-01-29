@@ -14,14 +14,14 @@ export default function App() {
   const [goals, setGoals] = useState([]);
 
   const handleInput = (text) => {
-    if (!text.trim()) {
-      return Alert.alert("Please enter a valid value!");
-    }
     setText(text);
   };
 
-  const handleAddGoal = (goal) => {
-    setGoals((prevState) => [...prevState, goal]);
+  const handleAddGoal = () => {
+    if (text.trim().length === 0) {
+      return Alert.alert("Please enter a valid value!");
+    }
+    setGoals((prevState) => [...prevState, text]);
     reset();
   };
 
@@ -38,7 +38,7 @@ export default function App() {
           onChangeText={handleInput}
           placeholder="Your course goal!"
         />
-        <Button onPress={() => handleAddGoal(text)} title="Add Goal" />
+        <Button onPress={handleAddGoal} title="Add Goal" />
       </View>
       <View style={styles.goalsContainer}>
         <FlatList
