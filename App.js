@@ -18,10 +18,11 @@ export default function App() {
   };
 
   const handleAddGoal = () => {
-    if (text.trim().length === 0) {
+    const goal = text.trim();
+    if (goal === "") {
       return Alert.alert("Please enter a valid value!");
     }
-    setGoals((prevState) => [...prevState, text]);
+    setGoals((prevState) => [...prevState, goal]);
     reset();
   };
 
@@ -43,7 +44,7 @@ export default function App() {
       <View style={styles.goalsContainer}>
         <FlatList
           data={goals}
-          renderItem={({ item }) => <Text>{item}</Text>}
+          renderItem={({ item }) => <Text style={styles.goalItem}>{item}</Text>}
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
@@ -76,5 +77,12 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 5,
+  },
+  goalItem: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: "#5e0acc",
+    color: "white",
   },
 });
