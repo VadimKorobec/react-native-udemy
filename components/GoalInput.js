@@ -2,9 +2,16 @@ import { useState } from "react";
 import "react-native-get-random-values";
 import { nanoid } from "nanoid";
 
-import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
+import {
+  Alert,
+  Button,
+  Modal,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 
-const GoalInput = ({onAddGoal}) => {
+const GoalInput = ({ onAddGoal, visible, onToggle }) => {
   const [text, setText] = useState("");
 
   const handleInput = (text) => {
@@ -23,7 +30,8 @@ const GoalInput = ({onAddGoal}) => {
       return Alert.alert("Please enter a valid value!");
     }
 
-    onAddGoal(goal)
+    onAddGoal(goal);
+
     reset();
   };
 
@@ -31,15 +39,24 @@ const GoalInput = ({onAddGoal}) => {
     setText("");
   };
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.textInput}
-        value={text}
-        onChangeText={handleInput}
-        placeholder="Your course goal!"
-      />
-      <Button onPress={handleAddGoal} title="Add Goal" />
-    </View>
+    <Modal visible={visible} animationType="fade">
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          value={text}
+          onChangeText={handleInput}
+          placeholder="Your course goal!"
+        />
+        <View style={styles.buttonContaiter}>
+          <View style={styles.button}>
+            <Button onPress={handleAddGoal} title="Add Goal" />
+          </View>
+          <View style={styles.button}>
+            <Button title="Cancel" onPress={onToggle} />
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 };
 
@@ -48,11 +65,11 @@ export default GoalInput;
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 5,
+    justifyContent: "center",
     alignItems: "center",
     marginBottom: 24,
+    padding:16,
+    gap: 24,
     borderBottomWidth: 1,
     borderBottomColor: "#cccccc",
   },
@@ -60,7 +77,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
     borderColor: "#cccccc",
-    width: "80%",
+    width: "100%",
     padding: 10,
+  },
+  buttonContaiter: {
+    flexDirection: "row",
+    gap: 20,
+  },
+  button: {
+    width: 120,
   },
 });
