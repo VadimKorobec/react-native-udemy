@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
-const GoalItem = ({ item }) => {
+const GoalItem = ({ item, onDelete }) => {
   return (
-    <View style={styles.goalItem}>
-      <Text style={styles.goalText}>{item.text}</Text>
-    </View>
+    <Pressable onPress={()=> onDelete(item.id)}>
+      <View style={styles.goalItem}>
+        <Text style={styles.goalText}>{item.text}</Text>
+      </View>
+    </Pressable>
   );
 };
 

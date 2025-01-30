@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 
 import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
 
-const GoalInput = ({onAdd}) => {
+const GoalInput = ({onAddGoal}) => {
   const [text, setText] = useState("");
 
   const handleInput = (text) => {
@@ -23,7 +23,7 @@ const GoalInput = ({onAdd}) => {
       return Alert.alert("Please enter a valid value!");
     }
 
-    onAdd(goal)
+    onAddGoal(goal)
     reset();
   };
 
