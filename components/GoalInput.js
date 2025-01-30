@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 import {
   Alert,
   Button,
+  Image,
   Modal,
   StyleSheet,
   TextInput,
@@ -31,7 +32,7 @@ const GoalInput = ({ onAddGoal, visible, onToggle }) => {
     }
 
     onAddGoal(goal);
-
+    onToggle();
     reset();
   };
 
@@ -39,20 +40,25 @@ const GoalInput = ({ onAddGoal, visible, onToggle }) => {
     setText("");
   };
   return (
-    <Modal visible={visible} animationType="fade">
+    <Modal visible={visible} animationType='slide'>
       <View style={styles.inputContainer}>
+        <Image
+          style={styles.image}
+          source={require("../assets/images/goal.png")}
+        />
         <TextInput
           style={styles.textInput}
           value={text}
           onChangeText={handleInput}
           placeholder="Your course goal!"
+          
         />
         <View style={styles.buttonContaiter}>
           <View style={styles.button}>
-            <Button onPress={handleAddGoal} title="Add Goal" />
+            <Button onPress={handleAddGoal} title="Add Goal" color="#5e0acc" />
           </View>
           <View style={styles.button}>
-            <Button title="Cancel" onPress={onToggle} />
+            <Button title="Cancel" onPress={onToggle} color="#f31282" />
           </View>
         </View>
       </View>
@@ -67,16 +73,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
-    padding:16,
+    padding: 16,
     gap: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
+    backgroundColor: "#311b6b",
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20,
   },
   textInput: {
     borderWidth: 1,
     borderRadius: 6,
-    borderColor: "#cccccc",
+    borderColor: "#e4d0ff",
+    backgroundColor: "#e4d0ff",
     width: "100%",
     padding: 10,
   },
